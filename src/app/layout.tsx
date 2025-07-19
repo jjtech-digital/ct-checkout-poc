@@ -37,7 +37,9 @@ export default function RootLayout({
           <CartProvider>
             <ToastContainer />
             <Header />
-            <div className="pb-16 flex flex-1 items-center justify-center">{children}</div>
+            <div className="pb-16 flex flex-1 items-center justify-center">
+              {children}
+            </div>
             <div className="fixed bottom-0 w-full">
               <Footer />
             </div>
