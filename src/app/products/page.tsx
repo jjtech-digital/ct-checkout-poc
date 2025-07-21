@@ -12,7 +12,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-// Heart Icon
 const HeartIcon = ({ filled }: { filled?: boolean }) => (
   <svg
     width={24}
@@ -27,15 +26,13 @@ const HeartIcon = ({ filled }: { filled?: boolean }) => (
   </svg>
 );
 
-// Star Rating
 const StarRating = ({ rating = 0, count = 0 }) => (
   <div className="flex items-center gap-1">
     {[...Array(5)].map((_, i) => (
       <svg
         key={i}
-        className={`w-4 h-4 ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
+        className={`w-4 h-4 ${i < rating ? "text-yellow-400" : "text-gray-300"
+          }`}
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -84,9 +81,7 @@ const Hit = ({ hit }: HitProps) => {
   const name = hit.name?.[locale] || "Unnamed Product";
   const slug = hit.slug?.[locale] || hit.objectID;
   const image = hit.variants?.[0]?.images?.[0] || "/placeholder.png";
-  // const description = hit.description?.[locale];
   const productSpec = hit.attributes?.productspec?.[locale];
-  // const categoryPath = hit.categories?.[locale]?.lvl2?.[0];
   const productType = hit.productType;
   const priceRaw = hit.variants?.[0]?.prices?.GBP?.min;
   const rrpRaw = hit.rrp;
@@ -104,18 +99,15 @@ const Hit = ({ hit }: HitProps) => {
   return (
     <Link href={`/product/${slug}`} className="block">
       <div className="relative bg-white border rounded-lg shadow-sm p-4 flex flex-col h-full hover:shadow-lg transition">
-        {/* Badge */}
         {badge && (
           <span
-            className={`absolute left-2 top-2 px-2 py-0.5 rounded text-xs font-bold ${
-              badge === "HOT DEAL" ? "bg-[#ff6e0d]" : "bg-[#e54747]"
-            } text-white z-10`}
+            className={`absolute left-2 top-2 px-2 py-0.5 rounded text-xs font-bold ${badge === "HOT DEAL" ? "bg-[#ff6e0d]" : "bg-[#e54747]"
+              } text-white z-10`}
           >
             {badge}
           </span>
         )}
 
-        {/* Wishlist */}
         <button
           className="absolute top-2 right-2 z-10"
           aria-label="Toggle wishlist"
@@ -135,22 +127,14 @@ const Hit = ({ hit }: HitProps) => {
           unoptimized={image === "/placeholder.png"}
         />
 
-        {/* Name */}
         <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1">
           {name}
         </h3>
 
-        {/* Type / Category */}
         {productType && (
           <p className="text-xs text-gray-500 mb-1">{productType}</p>
         )}
-        {/* {categoryPath && (
-          <p className="text-xs text-gray-500 italic mb-1 truncate">
-            {categoryPath}
-          </p>
-        )} */}
 
-        {/* Color / Finish */}
         {(colorLabel || finishLabel) && (
           <p className="text-xs text-gray-600 mb-1">
             {colorLabel && <span className="mr-2">Color: {colorLabel}</span>}
@@ -158,7 +142,6 @@ const Hit = ({ hit }: HitProps) => {
           </p>
         )}
 
-        {/* Spec / Stock */}
         {productSpec && (
           <p className="text-xs text-gray-500 italic truncate mb-1">
             {productSpec}
@@ -170,10 +153,8 @@ const Hit = ({ hit }: HitProps) => {
           </span>
         )}
 
-        {/* Rating */}
         <StarRating rating={rating} count={reviewCount} />
 
-        {/* Price */}
         <div className="mt-2">
           {rrp > price && (
             <p className="text-xs text-gray-400 line-through">
@@ -206,7 +187,6 @@ const ProductListingPage = () => (
   <InstantSearch indexName="dev_Products" searchClient={searchClient}>
     <div className="flex flex-col min-h-screen bg-[#f6f2ea]">
       <div className="flex flex-col lg:flex-row gap-6 max-w-[1520px] m-auto px-4 py-8 w-full">
-        {/* Filters Sidebar */}
         <aside className="lg:w-72 w-full max-w-full bg-white rounded-xl p-5 border border-gray-200 shadow-sm self-start min-h-[500px]">
           <button className="font-semibold text-sm flex items-center mb-4">
             <svg
@@ -231,7 +211,6 @@ const ProductListingPage = () => (
           </div>
         </aside>
 
-        {/* Main Product Area */}
         <main className="flex-1 w-full">
           <div className="flex justify-between items-center mb-5 flex-wrap gap-2">
             <Stats
