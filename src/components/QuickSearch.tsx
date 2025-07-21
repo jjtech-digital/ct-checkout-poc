@@ -3,6 +3,14 @@
 import React, { useState } from "react";
 import { InstantSearch, connectAutoComplete } from "react-instantsearch-dom";
 import searchClient from "@/lib/algoliaClient";
+import Image from "next/image";
+
+interface AutocompleteProps {
+  hits: HitProps["hit"][];
+  currentRefinement: string;
+  refine: (value: string) => void;
+}
+
 
 const locale = "en-GB";
 
@@ -26,9 +34,11 @@ const AutocompleteItem = ({ hit }: { hit: HitProps["hit"] }) => {
       href={`/product/${slug}`}
       className="flex items-center gap-3 p-2 hover:bg-gray-100 transition-colors duration-150 rounded"
     >
-      <img
+      <Image
         src={productImage}
         alt={productName}
+        width={48}
+        height={48}
         className="w-12 h-12 rounded object-cover"
       />
       <span className="text-sm text-gray-800 truncate">{productName}</span>
@@ -36,7 +46,11 @@ const AutocompleteItem = ({ hit }: { hit: HitProps["hit"] }) => {
   );
 };
 
-const Autocomplete = ({ hits, currentRefinement, refine }: any) => {
+const Autocomplete = ({
+  hits,
+  currentRefinement,
+  refine,
+}: AutocompleteProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

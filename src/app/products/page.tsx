@@ -22,6 +22,8 @@ interface HitProps {
     }>;
   };
 }
+type HitData = HitProps["hit"];
+
 
 const Hit = ({ hit }: HitProps) => {
   const productName = hit.name?.[locale] || "Unnamed product";
@@ -45,7 +47,6 @@ const Hit = ({ hit }: HitProps) => {
   );
 };
 
-// ✅ CustomHits Component wrapped with `connectHits`
 const CustomHits = connectHits(({ hits }: { hits: HitData[] }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
     {hits.map((hit, index) => (
@@ -54,7 +55,6 @@ const CustomHits = connectHits(({ hits }: { hits: HitData[] }) => (
   </div>
 ));
 
-// ✅ Product Listing Page
 const ProductListingPage = () => {
   return (
     <InstantSearch indexName="dev_Products" searchClient={searchClient}>
